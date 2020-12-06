@@ -1,0 +1,14 @@
+This app uses <<whois,whatweb,subfinder,wafw00f,a2sv,dnsenum,sqliv,wpscan,goofile,ffuf,hakrawler>>
+if you wnat to modify and ... this tool , You have to pay attention to license of the above tools.
+
+whois => unknown
+whatweb => https://github.com/urbanadventurer/WhatWeb
+subfinder => https://github.com/projectdiscovery/subfinder
+wafw00f => https://github.com/EnableSecurity/wafw00f
+a2sv => https://github.com/hahwul/a2sv
+dnsenum => unknown
+sqliv => https://github.com/the-robot/sqliv
+wpscan => https://github.com/wpscanteam/wpscan
+goofile => unknown
+ffuf => https://github.com/ffuf/ffuf
+hakrawler => https://github.com/hakluke/hakrawler
