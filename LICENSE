@@ -1,4 +1,4 @@
-This app uses <<whois,whatweb,subfinder,wafw00f,a2sv,dnsenum,sqliv,wpscan,goofile,ffuf,hakrawler>>
+This tool uses <<whois,whatweb,subfinder,wafw00f,a2sv,dnsenum,sqliv,wpscan,goofile,ffuf,hakrawler>>
 if you wnat to modify and ... this tool , You have to pay attention to license of the above tools.
 
 whois => unknown
