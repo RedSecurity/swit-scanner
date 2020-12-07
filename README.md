@@ -20,4 +20,4 @@ Just run the following command in the swit-scanner directory
 ## ScreenShot
 
 ## Contact us
-WebSite: [redsecurity.xyz](https://redsecurity.xyz)<br/>Email: info@redsecurity.xyz
+WebSite: https://redsecurity.xyz<br/>Email: info@redsecurity.xyz
