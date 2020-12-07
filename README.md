@@ -1,6 +1,6 @@
 # swit-scanner
 Very Powerful and Easy Automated Web Penetration Testing Tool<br>
-Swit Scanner uses <<whois,whatweb,subfinder,wafw00f,a2sv,dnsenum,sqliv,wpscan,goofile,ffuf,photon,hakrawler>> For Scan<br>
+Swit Scanner uses **whois,whatweb,subfinder,wafw00f,a2sv,dnsenum,sqliv,wpscan,goofile,ffuf,photon,hakrawler** For Scan<br>
 Working with Swet scanner is easier than you think.
 ## installation
 ```
