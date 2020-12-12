@@ -17,6 +17,10 @@ Just run the following command in the swit-scanner directory
 ```
 ./swit-scanner
 ```
+OR
+```
+bash swit-scanner
+```
 ## ScreenShot
 
 ## Contact us
