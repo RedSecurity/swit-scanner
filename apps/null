@@ -1,0 +1,42 @@
+﻿#!/bin/bash
+ls files/ >/dev/null 2>/dev/null
+if [ "$?" != "0" ]
+then
+mkdir files
+fi
+echo "" > pw-ffuf/status_200
+echo "" > pw-ffuf/status_300_200
+echo "" > pw-ffuf/status_300
+echo "" > pw-ffuf/3000
+echo "" > pw-ffuf/result
+echo "" > pw-ffuf/testurl
+echo "" > pw-ffuf/3000_ok
+echo "" > pw-ffuf/status_300_2
+echo "" > pw-ffuf/status_300_ok
+echo "" > files/whois
+echo "" > files/ping
+echo "" > files/pwf
+echo "" > files/crawl
+echo "" > files/pwf2
+echo "" > files/whois2
+echo "" > files/wp-scan
+echo "" > files/sub
+echo "" > files/hakrawler
+echo "" > files/internal.txt
+echo "" > files/files.txt
+echo "" > files/goofile_t1
+echo "" > files/goofile_t2
+echo "" > otp/xss
+echo "" > otp/whois
+echo "" > otp/web
+echo "" > otp/ip
+echo "" > otp/subdomain
+echo "" > otp/firewall
+echo "" > otp/ssl
+echo "" > otp/dns
+echo "" > otp/sqli
+echo "" > otp/wpscan
+echo "" > otp/goofile
+echo "" > otp/pw-ffuf
+echo "" > otp/crawl
+echo "salam" > files/dns

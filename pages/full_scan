@@ -1,0 +1,404 @@
+#!/bin/bash
+scan(){
+./apps/ffuf/ffuf -s -w $path -u $url/FUZZ -o ./pw-ffuf/result -of csv -mc all -t 30 -timeout 7 >/dev/null 2>/dev/null
+res=`cat pw-ffuf/result | grep ,200,`
+for i in $res
+do
+res2=`echo $i | cut -d ',' -f 5`
+if [ "$res2" == 200 ]
+then
+echo $i | cut -d ',' -f 1 | sed "s@^@$url\/@" >> pw-ffuf/status_200
+fi
+done
+cat pw-ffuf/result | cut -d ',' -f 3 | grep $url | sort | uniq -i >> ./pw-ffuf/status_300
+cat pw-ffuf/status_300 | sed "s@$url\/@@"  > pw-ffuf/status_300_2
+./apps/ffuf/ffuf -w pw-ffuf/status_300_2 -u $url/FUZZ -o ./pw-ffuf/status_300_ok -of csv -s -t 30 -mc all -timeout 7 > /dev/null 2>/dev/null
+res3=`cat pw-ffuf/status_300_ok | grep ,200,`
+for b in $res3
+do
+res4=`echo $b | cut -d ',' -f 5`
+if [ "$res4" == 200 ]
+then
+echo $b | cut -d ',' -f 1 | sed "s@^@$url\/@" >> pw-ffuf/status_300_200
+fi
+done
+cat pw-ffuf/status_300_ok | grep -v ,200, | cut -d ',' -f 3 | sort | uniq -i | sed "s@$url\/@@" > pw-ffuf/3000
+./apps/ffuf/ffuf -w pw-ffuf/3000 -u $url/FUZZ -o ./pw-ffuf/3000_ok -of csv -s -mc 200 -t 30 -timeout 7 > /dev/null 2>/dev/null
+
+(cat pw-ffuf/3000_ok | cut -d ',' -f 3 ; cat pw-ffuf/status_200 ; cat pw-ffuf/status_300_200) | sort | uniq -i | grep $domain > files/pwf
+}
+
+
+# ------------------funcions()
+bash apps/null
+pr(){
+clear
+echo `tput setaf 111`"
+███████╗██╗    ██╗██╗████████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
+██╔════╝██║    ██║██║╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
+███████╗██║ █╗ ██║██║   ██║       ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+╚════██║██║███╗██║██║   ██║       ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+███████║╚███╔███╔╝██║   ██║       ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝       ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+          ________________________________________________________________________
+         |                                                                        |
+         |     	               WebSite: RedSecurity.xyz                           |
+         |	                Creator: RedSecurity Admin		          |
+         |	                 E-mail: Info@RedSecurity.xyz		          |
+         |							     	          | 
+         --------------------------------------------------------------------------
+
+"
+}
+pr
+echo `tput setaf 202`
+sleep .12
+
+read -p' ┌─[Please Enter Your URL]
+ └──╼ ' url
+if [ "$url" == "" ]
+then
+while [ 1 == 1 ]
+do
+read -p' ┌─[Please Enter Your URL]
+ └──╼ ' url
+if [ "$url" != "" ]
+then
+break
+fi
+done
+fi
+
+
+
+echo `tput setaf 131`
+read -p' ┌─[Do You Want To Save Output? [Y]/N ]
+ └──╼ ' output
+case $output in
+"N")out="n";;
+"n")out="n";;
+"Y")out="y";;
+"y")out="y";;
+"")out="y";;
+*) echo ""
+echo `tput setaf 160` "Your Input is Invalid :)" `tput sgr0`
+echo ""
+sleep 1
+exit;; 
+esac
+
+
+url=`echo $url | sed 's/https:\/\///' | sed 's/http:\/\///' | sed 's/^/oupuput/' | sed 's/oupuputwww.//' | sed 's/oupuput//' | cut -d '/' -f 1`
+domain=$url
+ping -c 1 $domain > files/ping 2>/dev/null
+ip=`cat files/ping | grep $domain |grep "("| awk '{print $3}' | cut -d "(" -f 2 | sed 's/)//'|grep -v "from"`
+export domain
+
+web=`curl -I http://$url -s | head -1 | awk '{print $2}'`
+if [ "$web" == 200 ]
+then
+url=http://$url
+export url
+uruy=$url
+htos="http://"
+fi
+web=`curl -I https://$url -s | head -1 | awk '{print $2}'`
+if [ "$web" == 200 ]
+then
+url=https://$url
+export url
+uruy=$url
+htos=htos="https://"
+fi
+web=`curl -I http://www.$url -s | head -1 | awk '{print $2}'`
+if [ "$web" == 200 ]
+then
+url=http://www.$url
+export url
+uruy=$url
+htos="http://"
+fi
+web=`curl -I https://www.$url -s | head -1 | awk '{print $2}'`
+if [ "$web" == 200 ]
+then
+url=https://www.$url
+export url
+uruy=$url
+htos="https://"
+fi
+
+
+if [ "$uruy" == "" ]
+then
+echo ""
+echo `tput setaf 160` "Your URL is Invalid :)" `tput sgr0`
+echo ""
+sleep 1
+exit
+fi
+pr
+
+# ----------whois----------
+
+
+echo `tput setaf 248` "
+  ██     ██ ██   ██  ██████  ██ ███████ 
+  ██     ██ ██   ██ ██    ██ ██ ██      
+  ██  █  ██ ███████ ██    ██ ██ ███████   (with whois command) 
+  ██ ███ ██ ██   ██ ██    ██ ██      ██ 
+   ███ ███  ██   ██  ██████  ██ ███████                                       
+                                      "
+whois $domain > files/whois
+echo "┎╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+cat files/whois | grep ":" | grep -v "   " |grep -v "whois" |grep -v "NOTICE:"|grep -v "more information"| grep -vi "TERMS OF USE:"|grep -v "support the transmission"  > files/whois2
+yoyon=`cat files/whois2`
+if [ "$yoyon" == "" ]
+then
+cat files/whois|grep -v "NOTE"|grep -v ":$" | grep "   " | sed 's/   /  /g'|tee otp/whois|sed "s/^/┃/"
+else
+cat files/whois2|grep -v "NOTE"|grep -v ":$"| sed 's/^/  /'|tee otp/whois| sed 's/^/┃/'
+fi
+echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+
+echo `tput setaf 42`"
+
+
+  ██ ███    ██ ███████  ██████  
+  ██ ████   ██ ██      ██    ██ 
+  ██ ██ ██  ██ █████   ██    ██ 
+  ██ ██  ██ ██ ██      ██    ██ 
+  ██ ██   ████ ██       ██████  
+                              "
+echo "┎╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+
+echo "   	      _     
+             | |    
+__      _____| |__  
+\ \ /\ / / _ \ '_ \ 
+ \ V  V /  __/ |_) |   (scan with whatweb)
+  \_/\_/ \___|_.__/ 
+ " | tee otp/web | sed 's/^/┃/'                  
+whatweb --color=never $url | sed 's/, /\n/g' | sed 's@\[200 OK\]@@' |sed "s@$url@@" | sed 's/  //'| sed 's/^/  /'| tee -a otp/web | sed 's/^/┃/'
+echo "
+ _     
+(_)  _ __  
+ _  | '_ \ 
+| | | |_) |   (scan with ipapi.co)
+| | | .__/ 
+| | | |     
+|_| |_|   "| tee otp/ip | sed 's/^/┃/' 
+curl https://ipapi.co/$ip/json/ -s| sed 's/"//g' | sed 's/    //g' | sed 's/,//g' | sed 's/{//g' | sed 's/}//g'| sed 's/^/  /'| tee -a otp/ip| sed 's/^/┃/'
+echo "
+ _____       _         _                       _           
+/  ___|     | |       | |                     (_)          
+\  --. _   _| |__   __| | ___  _ __ ___   __ _ _ _ __  ___ 
+ '--. \ | | | '_ \ / _' |/ _ \| '_ ' _ \ / _, | | '_ \/ __|
+/\__/ / |_| | |_) | (_| | (_) | | | | | | (_| | | | | \__ \   (scan with subfinder => https://github.com/projectdiscovery/subfinder.git)
+\____/ \__,_|_.__/ \__,_|\___/|_| |_| |_|\__,_|_|_| |_|___/
+" | sed 's/^/┃/'                                                                                                                      
+apps/subfinder/v2/cmd/subfinder/subfinder -nC -d $domain -silent | grep -v "20\."|sed 's/www.//g' > files/sub
+for i in `cat files/sub`
+do
+t=`ping -c 1 $i 2>/dev/null`
+if [ "$t" != "" ]
+then
+echo "  $i"|tee -a otp/subdomain| sed 's/^/┃/'
+fi
+done
+echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+
+echo `tput setaf 45`"
+
+
+███████  ██████  █████  ███    ██ 
+██      ██      ██   ██ ████   ██ 
+███████ ██      ███████ ██ ██  ██ 
+     ██ ██      ██   ██ ██  ██ ██ 
+███████  ██████ ██   ██ ██   ████ 
+                                  "                                  
+echo "┎╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+echo "
+______ _                        _ _ 
+|  ___(_)                      | | |
+| |_   _ _ __ _____      ____ _| | |
+|  _| | | '__/ _ \ \ /\ / / _' | | |   (scan with wafw00f => https://github.com/EnableSecurity/wafw00f.git)
+| |   | | | |  __/\ V  V / (_| | | |
+\_|   |_|_|  \___| \_/\_/ \__,_|_|_|
+"| tee otp/firewall | sed 's/^/┃/' 
+(wafw00f $url | grep "WAF" | sed 's/\x1b\[[0-9;]*m//g')| sed 's/^/  /'|tee -a otp/firewall |   sed 's/^/┃/'
+echo "
+ _____ _____ _     
+/  ___/  ___| |    
+\ '--.\ '--.| |    (scan with a2sv => https://github.com/hahwul/a2sv.git)    
+ '--. \'--. \ |    
+/\__/ /\__/ / |____
+\____/\____/\_____/
+                   "| tee otp/ssl | sed 's/^/┃/' 
+(python2 apps/a2sv/a2sv.py -t $domain| grep "CVE" |sed 's/State/State\n~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~/'| sed 's/^/  /'| tee -a otp/ssl| sed 's/^/┃/') 2>/dev/null
+
+echo "
+______ _   _  _____ 
+|  _  \ \ | |/  ___|
+| | | |  \| |\ '--. 
+| | | | . ' | '--. \    (scan with dnsenum)
+| |/ /| |\  |/\__/ /
+|___/ \_| \_/\____/ 
+"| tee otp/dns | sed 's/^/┃/' 
+(dnsenum -f files/dns --noreverse --nocolor --threads 10 $domain|sed 's/_/~/g' | grep -v "Brute forcing" | grep -v "class" | grep -v "blocks" | grep -v "\.0/"  | grep -v "../" | grep -v "done" | grep -v "^$" | sed 's/Host/\nHost/' | sed 's/Trying Zone Transfers/\nTrying Zone Transfers/' | sed 's/Name/\nName/'|sed 's/Mail/\nMail/' | tac | tail -n +4 | tac| grep -v "!" | grep -v "Wildcards" | grep -v "Omitting" | grep -v "Maybe " |sed 's/Wildcard /\nWildcard /'| sed 's/^/  /'| tee -a otp/dns|sed 's/^/┃/') 2>/dev/null
+rm $domain\_ips.txt
+
+echo "
+ __   __ _____ _____ 
+ \ \ / // ____/ ____|
+  \ V /| (___\ (___  
+   > <  \___ |\___ \    (scan with xsstrike => https://github.com/s0md3v/XSStrike.git)
+  / . \ ____) |___) |
+ /_/ \_\_____/_____/
+"| tee otp/xss |sed 's/^/┃/'
+python3 apps/XSStrike/xsstrike.py --crawl --skip --skip-dom -u $url|sed 's/\x1b\[[0-9;]*m//g' |grep -v "\[++\]"| grep -v "\-\-\-"|grep -v "Crawling"|grep -v "Progress:"|sed "s@\[+\]@\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\[+\]@g"|sed 's/^/  /'| tee -a otp/xss|sed 's/^/┃/'
+xsn=`cat otp/xss | grep "\[!\]"`
+if [ "$xsn" == "" ]
+then
+echo "┃        No XSS Found !!!"
+fi
+
+echo "
+ _____       _   _       _           _   _             
+/  ___|     | | (_)     (_)         | | (_)            
+\ '--.  __ _| |  _ _ __  _  ___  ___| |_ _  ___  _ __  
+ '--. \/ _' | | | | '_ \| |/ _ \/ __| __| |/ _ \| '_ \    (scan with Photon => https://github.com/s0md3v/Photon.git)
+/\__/ / (_| | | | | | | | |  __/ (__| |_| | (_) | | | |   (scan with sqliv => https://github.com/the-robot/sqliv.git)
+\____/ \__, |_| |_|_| |_| |\___|\___|\__|_|\___/|_| |_|   (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+          | |          _/ |                            
+          |_|         |__/                            
+" | sed 's/^/┃/'
+echo "┃"
+printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
+echo "┃" 
+apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
+python3 apps/Photon/photon.py --only-urls -u $url -o files/ > /dev/null 2>/dev/null
+cat files/hakrawler files/internal.txt |sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g"|grep $domain|sort|uniq -i > files/crawl
+ur=`cat files/crawl | grep "?" `
+if [ "$ur" == "" ]
+then
+echo "┃        No Sql Injection Found !!!"
+else
+for s in `cat files/crawl | grep "?"|head -n 4`
+do
+sqlmap -u $s --flush-session --batch --output-dir=apps/sqli --disable-coloring --dbs --retries 1 --timeout 5 >/dev/null 2>/dev/null
+issy=`cat apps/sqli/*$domain/log|grep -v "^$"`
+if [ "$issy" != "" ]
+then
+echo "Vulnerable => $s"|sed 's/^/  /'|tee otp/sqli|sed 's/^/\┃/'
+fi
+done
+osq=`cat otp/sqli | grep "/"`
+if [ "$osq" == "" ]
+then
+echo "┃        No Sql Injection Found !!!"
+fi
+fi
+
+
+echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+wpscan --url $url -e ap,t,cb,dbe,m,u1-100 --no-banner --no-update -f cli-no-color|sed 's/=//g'|sed "s@||@@g"|tail -n +4|tac|tail -n +9|tac|sed "s@\[!\]@oppoi@"|grep -v "oppoi"|sed 's/^/  /'|tee otp/wpscan|sed 's/^/\┃/'>files/wp-scan
+
+wpyn=`cat files/wp-scan | grep -v "^$"`
+if [ "$wpyn" != "" ]
+then
+echo `tput setaf 40` "
+
+██     ██ ██████      ███████  ██████  █████  ███    ██ 
+██     ██ ██   ██     ██      ██      ██   ██ ████   ██
+██  █  ██ ██████      ███████ ██      ███████ ██ ██  ██    (scan with wpscan => https://github.com/wpscanteam/wpscan.git)
+██ ███ ██ ██               ██ ██      ██   ██ ██  ██ ██
+ ███ ███  ██          ███████  ██████ ██   ██ ██   ████ 
+                                                        "
+echo "┎╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+
+cat files/wp-scan
+
+echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+fi
+echo `tput setaf 226`"
+
+███████ ██    ██ ███████ ███████ ██ ███    ██  ██████  
+██      ██    ██    ███     ███  ██ ████   ██ ██         
+█████   ██    ██   ███     ███   ██ ██ ██  ██ ██   ███
+██      ██    ██  ███     ███    ██ ██  ██ ██ ██    ██
+██       ██████  ███████ ███████ ██ ██   ████  ██████                                                         
+                                                       "
+
+echo "┎╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+echo "
+______ _ _           
+|  ___(_) |          
+| |_   _| | ___  ___ 
+|  _| | | |/ _ \/ __|   (scan with goofile)
+| |   | | |  __/\__ \   (scan with Photon => https://github.com/s0md3v/Photon.git)
+\_|   |_|_|\___||___/   (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+" | sed 's/^/┃/' 
+(goofile -d $domain -f txt ; goofile -d $domain -f xls; goofile -d $domain -f xlsx; goofile -d $domain -f pdf; goofile -d $domain -f xml; goofile -d $domain -f pptp; goofile -d $domain -f doc; goofile -d $domain -f pptpx; goofile -d $domain -f docx; goofile -d $domain -f csv) | grep $domain | grep -v "Searching in ">files/goofile_t1
+cat files/files.txt|grep $domain|sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g" >> files/goofile_t2
+(cat files/goofile_t1;cat files/goofile_t2 | grep "\.txt";cat files/goofile_t2 | grep "\.xls";cat files/goofile_t2 | grep "\.xlsx";cat files/goofile_t2 | grep "\.pdf";cat files/goofile_t2 | grep "\.xml";cat files/goofile_t2 | grep "\.pptp";cat files/goofile_t2 | grep "\.doc";cat files/goofile_t2 | grep "\.docx";cat files/goofile_t2 | grep "\.pptpx")|sed "s@www.@@g" | sed "s@http://@@g"|sed "s@https://@@g"|sort|uniq -i|sed "s@^@$htos@"|sed 's/^/  /'| tee -a otp/goofile | sed 's/^/┃/'
+gfn=`cat otp/goofile | grep "/"`
+if [ "$gfn" == "" ]
+then
+echo "┃        No URL Found !!!"
+fi
+echo "
+______            _        ______                 
+| ___ \          | |       |  ___|                
+| |_/ /_ __ _   _| |_ ___  | |_ ___  _ __ ___ ___ 
+| ___ \ '__| | | | __/ _ \ |  _/ _ \| '__/ __/ _ \'
+| |_/ / |  | |_| | ||  __/ | || (_) | | | (_|  __/   (scan with ffuf => https://github.com/ffuf/ffuf.git)
+\____/|_|   \__,_|\__\___| \_| \___/|_|  \___\___|   (word list => dirb & ...)
+                                                  
+"| sed 's/^/┃/' 
+echo "┃"
+printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!\n"
+echo "┃"
+path=pw-ffuf/wordlist.txt
+scan
+cat files/pwf| sed 's/^/  /'| tee -a otp/pw-ffuf | sed 's/^/┃/'
+pwn=`cat files/pwf | grep "/"`
+if [ "$pwn" == "" ]
+then
+echo "┃        No URL Found !!!"
+fi
+
+echo "
+ _____                    _ _             
+/  __ \                  | (_)            
+| /  \/_ __ __ ___      _| |_ _ __   __ _ 
+| |   | '__/ _, \ \ /\ / / | | '_ \ / _' |
+| \__/\ | | (_| |\ V  V /| | | | | | (_| |   (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+ \____/_|  \__,_| \_/\_/ |_|_|_| |_|\__, |
+                                     __/ |
+                                    |___/ " | sed 's/^/┃/' 
+cat files/crawl | sed 's/^/  /'| tee -a otp/crawl|sed 's/^/┃/'
+crn=`cat files/crawl | grep "/"`
+if [ "$crn" == "" ]
+then
+echo "┃        No URL Found !!!"
+fi
+echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
+if [ "$out" == "y" ]
+then
+bash otp/result
+echo ""
+echo `tput setaf 82` "Result Saved in <<result.html>>" `tput sgr0`
+echo ""
+else
+echo `tput setaf 40` "" `tput sgr0`
+fi
+
+
+
+
+
+
+
+
+
+

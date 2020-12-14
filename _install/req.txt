@@ -1,0 +1,5 @@
+requests
+requests[socks]
+urllib3
+tld
+fuzzywuzzy

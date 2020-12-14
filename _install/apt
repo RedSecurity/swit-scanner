@@ -1,0 +1,93 @@
+#!/bin/bash
+rm -f apps/screen.png 2> /dev/null
+apt-get update
+apt-get install -y curl
+apt-get install -y whois
+
+goofile > /dev/null 2> /dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y goofile
+fi
+
+git > /dev/null 2> /dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y git-all
+fi
+
+python2 -h >/dev/null 2>/dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y python2
+fi
+
+python3 -h >/dev/null 2>/dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y python3
+fi
+apt-get install -y python-setuptools
+go > /dev/null 2> /dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y golang
+fi
+
+sqlmap > /dev/null 2> /dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y sqlmap
+fi
+
+apt-get install -y openssl
+apt-get install -y whatweb
+apt-get install -y dnsenum
+apt-get install -y wafw00f
+
+wpscan > /dev/null 2> /dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y gem
+apt-get install -y ruby
+apt-get install -y build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev
+gem install wpscan
+fi
+wpscan --no-banner --update > /dev/null 2>/dev/nul
+
+pip3 > /dev/null 2>/dev/null
+if [ "$?" == "127" ]
+then
+apt-get install -y python3-pip
+fi
+bash lib/install.sh
+pip3 install -r _install/req.txt
+cd apps
+git clone https://github.com/s0md3v/Photon.git
+git clone https://github.com/s0md3v/XSStrike.git
+git clone https://github.com/projectdiscovery/subfinder.git
+cd subfinder/v2/cmd/subfinder
+go get
+go build
+cd ../../../../
+git clone https://github.com/ffuf/ffuf.git
+cd ffuf
+go get
+go build
+cd ..
+
+git clone https://github.com/hakluke/hakrawler.git
+cd hakrawler
+go get
+go build
+cd ..
+git clone https://github.com/hahwul/a2sv
+cd a2sv
+cat a2sv.py | grep -v "os.system('cls' if os.name=='nt' else 'clear')" > a2sv.py2
+cat a2sv.py2 > a2sv.py
+rm -f a2sv.py2
+cd ..
+rm -f screen.png
+clear
+echo `tput setaf 82` "Installation was Successful !!!" `tput sgr0`
+

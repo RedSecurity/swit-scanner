@@ -1,0 +1,199 @@
+#!/bin/bash
+echo '
+<!DOCTYPE html>
+<html style="background-color:#CCD1D1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swit Scanner</title>
+<style>
+div{
+width: 80vw;
+padding:10px
+}
+pre{
+font-size:1.12rem}
+p {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    padding:0;
+    margin:12.5px 0 12.5px 0;
+    width:80vw;
+    font-size:1.25rem
+}
+hr {
+background-color:gray;
+opacity:.5
+}
+</style>
+</head>
+<body>
+<div style="width:99%">
+<pre style=" display: flex;justify-content: center;color:#0a3623;font-size:1.3rem">
+███████╗██╗    ██╗██╗████████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
+██╔════╝██║    ██║██║╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
+███████╗██║ █╗ ██║██║   ██║       ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+╚════██║██║███╗██║██║   ██║       ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+███████║╚███╔███╔╝██║   ██║       ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚══════╝ ╚══╝╚══╝ ╚═╝   ╚═╝       ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+</pre>
+</div>
+<div style="width: 99%">'>result.html
+
+echo '<div style="display: table;margin-left: auto;margin-right: auto;background-color:#8A5A10;width:80vw"><pre>'>>result.html
+echo "
+██     ██ ██   ██  ██████  ██ ███████ 
+██     ██ ██   ██ ██    ██ ██ ██      
+██  █  ██ ███████ ██    ██ ██ ███████   (with whois command) 
+██ ███ ██ ██   ██ ██    ██ ██      ██ 
+ ███ ███  ██   ██  ██████  ██ ███████
+
+
+╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸">>result.html
+cat otp/whois >> result.html
+echo '</pre></div>'>>result.html
+
+
+
+echo '<div style="display: table;margin-left: auto;margin-right: auto;background-color:#11DA6B;width:80vw"><pre>'>>result.html
+echo "
+██ ███    ██ ███████  ██████  
+██ ████   ██ ██      ██    ██ 
+██ ██ ██  ██ █████   ██    ██ 
+██ ██  ██ ██ ██      ██    ██ 
+██ ██   ████ ██       ██████
+
+
+╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸">>result.html
+cat otp/web >>result.html
+cat otp/ip >> result.html
+echo "<pre>
+ _____       _         _                       _           
+/  ___|     | |       | |                     (_)          
+\  --. _   _| |__   __| | ___  _ __ ___   __ _ _ _ __  ___ 
+ '--. \ | | | '_ \ / _' |/ _ \| '_ ' _ \ / _, | | '_ \/ __|
+/\__/ / |_| | |_) | (_| | (_) | | | | | | (_| | | | | \__ \ (subfinder => https://github.com/projectdiscovery/subfinder.git)
+\____/ \__,_|_.__/ \__,_|\___/|_| |_| |_|\__,_|_|_| |_|___/
+</pre>">>result.html
+cat otp/subdomain >> result.html
+echo '</pre></div>'>>result.html
+
+
+echo '<div style="display: table;margin-left: auto;margin-right: auto;background-color:#11DACF;width:80vw"><pre>'>>result.html
+echo "
+███████  ██████  █████  ███    ██ 
+██      ██      ██   ██ ████   ██ 
+███████ ██      ███████ ██ ██  ██ 
+     ██ ██      ██   ██ ██  ██ ██ 
+███████  ██████ ██   ██ ██   ████
+
+
+╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸">>result.html
+cat otp/firewall >>result.html
+cat otp/ssl >> result.html
+cat otp/dns >> result.html
+cat otp/xss >> result.html
+sq=`cat otp/sqli|tail -n +11`
+if [ "$sq" != "" ]
+then
+echo "<pre>
+ _____       _   _       _           _   _             
+/  ___|     | | (_)     (_)         | | (_)            
+\ '--.  __ _| |  _ _ __  _  ___  ___| |_ _  ___  _ __  
+ '--. \/ _' | | | | '_ \| |/ _ \/ __| __| |/ _ \| '_ \  (scan with Photon => https://github.com/s0md3v/Photon.git)
+/\__/ / (_| | | | | | | | |  __/ (__| |_| | (_) | | | | (scan with sqliv => https://github.com/the-robot/sqliv.git)
+\____/ \__, |_| |_|_| |_| |\___|\___|\__|_|\___/|_| |_| (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+          | |          _/ |                            
+          |_|         |__/                            
+</pre>">>result.html
+cat otp/sqli >> result.html
+fi
+echo '</pre></div>'>>result.html
+
+wp=`cat files/wp-scan`
+if [ "$wp" != "" ]
+then
+echo '<div style="display: table;margin-left: auto;margin-right: auto;background-color:#18DA11;width:80vw"><pre>'>>result.html
+echo "
+██     ██ ██████      ███████  ██████  █████  ███    ██ 
+██     ██ ██   ██     ██      ██      ██   ██ ████   ██    (scan with wpscan => https://github.com/wpscanteam/wpscan.git) 
+██  █  ██ ██████      ███████ ██      ███████ ██ ██  ██    (scan with ffuf => https://github.com/ffuf/ffuf.git) 
+██ ███ ██ ██               ██ ██      ██   ██ ██  ██ ██    (scan with hakrawler => https://github.com/hakluke/hakrawler.git) 
+ ███ ███  ██          ███████  ██████ ██   ██ ██   ████
+
+
+╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸">>result.html
+cat otp/wpscan >> result.html
+echo '</pre></div>'>>result.html
+fi
+gfn=`cat otp/goofile | grep "/"`
+pwn=`cat files/pwf | grep "/"`
+crn=`cat files/crawl | grep "/"`
+
+if [ "$gfn" != "" ]||[ "$pwn" != "" ]||[ "$crn" != "" ]
+then
+echo '<div style="display: table;margin-left: auto;margin-right: auto;background-color:#EEEE13;width:80vw"><pre>'>>result.html
+echo "
+███████ ██    ██ ███████ ███████ ██ ███    ██  ██████  
+██      ██    ██    ███     ███  ██ ████   ██ ██       
+█████   ██    ██   ███     ███   ██ ██ ██  ██ ██   ███ 
+██      ██    ██  ███     ███    ██ ██  ██ ██ ██    ██ 
+██       ██████  ███████ ███████ ██ ██   ████  ██████
+
+
+╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸</pre>">>result.html
+if [ "$gfn" != "" ]
+then
+echo "<pre>
+______ _ _           
+|  ___(_) |          
+| |_   _| | ___  ___ 
+|  _| | | |/ _ \/ __|   (scan with goofile)
+| |   | | |  __/\__ \   (scan with Photon => https://github.com/s0md3v/Photon.git)
+\_|   |_|_|\___||___/   (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+
+</pre>" >> result.html
+cat otp/goofile |sed "s@^@<p>@"|sed "s@\$@</p><hr>@" >> result.html
+fi
+if [ "$pwn" != "" ]
+then
+echo "<pre>
+______            _        ______                 
+| ___ \          | |       |  ___|                
+| |_/ /_ __ _   _| |_ ___  | |_ ___  _ __ ___ ___ 
+| ___ \ '__| | | | __/ _ \ |  _/ _ \| '__/ __/ _ \'
+| |_/ / |  | |_| | ||  __/ | || (_) | | | (_|  __/   (scan with ffuf => https://github.com/ffuf/ffuf.git)
+\____/|_|   \__,_|\__\___| \_| \___/|_|  \___\___|   (word list => dirb & ...)
+
+</pre>">> result.html
+
+cat otp/pw-ffuf|sed "s@^@<p>@"|sed "s@\$@</p><hr>@" >> result.html
+fi
+if [ "$crn" != "" ]
+then
+echo "<pre>
+ _____                    _ _             
+/  __ \                  | (_)            
+| /  \/_ __ __ ___      _| |_ _ __   __ _ 
+| |   | '__/ _, \ \ /\ / / | | '_ \ / _' |
+| \__/\ | | (_| |\ V  V /| | | | | | (_| |   (scan with hakrawler => https://github.com/hakluke/hakrawler.git)
+ \____/_|  \__,_| \_/\_/ |_|_|_| |_|\__, |
+                                     __/ |
+                                    |___/
+</pre>">> result.html
+
+
+cat otp/crawl|sed "s@^@<p>@"|sed "s@\$@</p><hr>@" >> result.html
+fi
+echo '</div>'>>result.html
+fi
+
+
+
+echo '
+</div>
+</body>
+</html>'>>result.html
