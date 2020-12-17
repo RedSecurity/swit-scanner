@@ -13,7 +13,7 @@ fi
 git > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y git-all
+apt-get install -y git
 fi
 
 python2 -h >/dev/null 2>/dev/null
