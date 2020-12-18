@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 scan(){
 ./apps/ffuf/ffuf -s -w $path -u $url/FUZZ -o ./pw-ffuf/result -of csv -mc all -t 30 -timeout 7 >/dev/null 2>/dev/null
 res=`cat pw-ffuf/result | grep ,200,`
