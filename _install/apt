@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 rm -f apps/screen.png 2> /dev/null
 apt-get update
 apt-get install -y curl
