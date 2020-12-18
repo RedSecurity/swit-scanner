@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#! /bin/bash
 ls files/ >/dev/null 2>/dev/null
 if [ "$?" != "0" ]
 then
