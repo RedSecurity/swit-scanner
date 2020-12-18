@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 apt > /dev/null 2>/dev/null
 if [ $? != "127" ]
 then
