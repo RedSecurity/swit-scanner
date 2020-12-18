@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 cd lib
 #---------
 python2 -m argparse >/dev/null 2>/dev/null
