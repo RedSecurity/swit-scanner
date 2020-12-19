@@ -276,7 +276,7 @@ echo "┃"
 printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
-python3 apps/Photon/photon.py --only-urls -u $url -o files/ > /dev/null 2>/dev/null
+python3 apps/Photon/photon.py -l 3 --only-urls -u $url -o files/ > /dev/null 2>/dev/null
 cat files/hakrawler files/internal.txt |sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g"|grep $domain|sort|uniq -i > files/crawl
 ur=`cat files/crawl | grep "?" `
 if [ "$ur" == "" ]
