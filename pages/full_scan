@@ -387,7 +387,7 @@ if [ "$out" == "y" ]
 then
 bash otp/result
 echo ""
-echo `tput setaf 82` "Result Saved in <<result.html>>" `tput sgr0`
+echo `tput setaf 82` "Results Saved in <<result.html>>" `tput sgr0`
 echo ""
 else
 echo `tput setaf 40` "" `tput sgr0`
