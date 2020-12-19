@@ -48,10 +48,7 @@ apt-get install -y wafw00f
 wpscan > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y gem
-apt-get install -y ruby
-apt-get install -y build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev
-gem install wpscan
+apt-get install -y wpscan
 fi
 wpscan --no-banner --update > /dev/null 2>/dev/null
 
