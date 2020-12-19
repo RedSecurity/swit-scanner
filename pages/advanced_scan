@@ -524,7 +524,7 @@ echo "┃"
 printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
-python3 apps/Photon/photon.py --only-urls -u $url -o files/ > /dev/null 2>/dev/null
+python3 apps/Photon/photon.py --only-urls -l 3 -u $url -o files/ > /dev/null 2>/dev/null
 cat files/hakrawler files/internal.txt |sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g"|grep $domain|sort|uniq -i > files/crawl
 ur=`cat files/crawl | grep "?" `
 if [ "$ur" == "" ]
@@ -601,7 +601,7 @@ echo "┃"
 printf "┃            ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
-python3 apps/Photon/photon.py --only-urls -u $url -o files/ > /dev/null 2>/dev/null
+python3 apps/Photon/photon.py -l 3 --only-urls -u $url -o files/ > /dev/null 2>/dev/null
 cat files/hakrawler files/internal.txt |sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g"|grep $domain|sort|uniq -i > files/crawl
 fi
 (goofile -d $domain -f txt ; goofile -d $domain -f xls; goofile -d $domain -f xlsx; goofile -d $domain -f pdf; goofile -d $domain -f xml; goofile -d $domain -f pptp; goofile -d $domain -f doc; goofile -d $domain -f pptpx; goofile -d $domain -f docx; goofile -d $domain -f csv) | grep $domain | grep -v "Searching in ">files/goofile_t1
@@ -654,7 +654,7 @@ echo "┃"
 printf "┃             ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
-python3 apps/Photon/photon.py --only-urls -u $url -o files/ > /dev/null 2>/dev/null
+python3 apps/Photon/photon.py -l 3 --only-urls -u $url -o files/ > /dev/null 2>/dev/null
 cat files/hakrawler files/internal.txt |sed "s@\.\./@@g"|sed 's/\.\///g'|sed "s@//@/@g" | sed "s@:/@://@g"|grep $domain|sort|uniq -i > files/crawl
 fi
 cat files/crawl | sed 's/^/  /'| tee -a otp/crawl|sed 's/^/┃/'
