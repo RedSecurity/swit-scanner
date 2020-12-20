@@ -512,7 +512,7 @@ echo "
           |_|         |__/                            
 " | sed 's/^/┃/'
 echo "┃"
-printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
+printf "┃                           ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "! (This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
 python3 apps/Photon/photon.py --only-urls -l 3 -u $url -o files/ > /dev/null 2>/dev/null
@@ -589,7 +589,7 @@ crty=`cat files/crawl |grep "/"`
 if [ "$crty" == "" ]
 then
 echo "┃"
-printf "┃            ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
+printf "┃            ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "! (This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
 python3 apps/Photon/photon.py -l 3 --only-urls -u $url -o files/ > /dev/null 2>/dev/null
@@ -642,7 +642,7 @@ crty=`cat files/crawl |grep "/"`
 if [ "$crty" == "" ]
 then
 echo "┃"
-printf "┃             ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "!(This scan may take a long time...)\n"
+printf "┃             ";printf P;sleep .12 ;printf l;sleep .12;printf e;sleep .12;printf a;sleep .12;printf s;sleep .12;printf e;sleep .12;printf " W";sleep .12;printf a;sleep .12;printf i;sleep .12;printf "t";sleep .2;printf " !";sleep .2; printf \!;sleep .2;printf "! (This scan may take a long time...)\n"
 echo "┃" 
 apps/hakrawler/hakrawler -url $url -plain > files/hakrawler
 python3 apps/Photon/photon.py -l 3 --only-urls -u $url -o files/ > /dev/null 2>/dev/null
