@@ -20,7 +20,6 @@ echo "" > files/crawl
 echo "" > files/pwf2
 echo "" > files/whois2
 echo "" > files/wp-scan
-echo "" > files/sub
 echo "" > files/hakrawler
 echo "" > files/internal.txt
 echo "" > files/files.txt
