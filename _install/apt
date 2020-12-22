@@ -1,4 +1,5 @@
 #! /bin/bash
+sudo echo ""
 rm -f apps/screen.png 2> /dev/null
 sudo apt-get update
 sudo apt-get install -y curl
@@ -83,8 +84,6 @@ cd a2sv
 cat a2sv.py | grep -v "os.system('cls' if os.name=='nt' else 'clear')" > a2sv.py2
 cat a2sv.py2 > a2sv.py
 rm -f a2sv.py2
-cd ..
-rm -f screen.png
 clear
 echo `tput setaf 82` "Installation was Successful !!!" `tput sgr0`
 
