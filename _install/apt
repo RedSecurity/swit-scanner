@@ -1,63 +1,63 @@
 #! /bin/bash
 rm -f apps/screen.png 2> /dev/null
-apt-get update
-apt-get install -y curl
-apt-get install -y whois
+sudo apt-get update
+sudo apt-get install -y curl
+sudo apt-get install -y whois
 
 goofile > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y goofile
+sudo apt-get install -y goofile
 fi
 
 git > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y git
+sudo apt-get install -y git
 fi
 
 python2 -h >/dev/null 2>/dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y python2
+sudo apt-get install -y python2
 fi
 
 python3 -h >/dev/null 2>/dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y python3
+sudo apt-get install -y python3
 fi
 apt-get install -y python-setuptools
 go > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y golang
+sudo apt-get install -y golang
 fi
 
 sqlmap > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y sqlmap
+sudo apt-get install -y sqlmap
 fi
 
-apt-get install -y openssl
-apt-get install -y whatweb
-apt-get install -y dnsenum
-apt-get install -y wafw00f
+sudo apt-get install -y openssl
+sudo apt-get install -y whatweb
+sudo apt-get install -y dnsenum
+sudo apt-get install -y wafw00f
 
 wpscan > /dev/null 2> /dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y wpscan
+sudo apt-get install -y wpscan
 fi
 wpscan --no-banner --update > /dev/null 2>/dev/null
 
 pip3 > /dev/null 2>/dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y python3-pip
+sudo apt-get install -y python3-pip
 fi
-bash lib/install.sh
+sudo bash lib/install.sh
 pip3 install -r _install/req.txt
 cd apps
 git clone https://github.com/s0md3v/Photon.git
