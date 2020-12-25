@@ -8,7 +8,7 @@ Working with Swet scanner is easier than you think.
 ```
 1. git clone https://github.com/RedSecurity/swit-scanner.git
 2. cd swit-scanner
-3. sudo bash installer.sh
+3. bash installer.sh
 ```
 If you do not use **kali linux** or **parrot** or ..., run the following command before running step 3
 ```
