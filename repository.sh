@@ -3,7 +3,7 @@ sudo apt-get update
 pip3 > /dev/null 2>/dev/null
 if [ "$?" == "127" ]
 then
-apt-get install -y python3-pip
+sudo apt-get install -y python3-pip
 fi
 sudo add-apt-repository "deb http://http.kali.org/kali kali-rolling main non-free contrib"
 sudo add-apt-repository "deb-src http://http.kali.org/kali kali-rolling main non-free contrib"
