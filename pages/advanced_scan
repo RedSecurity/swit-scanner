@@ -432,6 +432,7 @@ echo "
 apps/subfinder/v2/cmd/subfinder/subfinder -nC -oI -nW -d $domain -all -silent |cut -d "," -f 1,2 |sed 's/$/\]/'| sed 's/,/\ => \[/g' |sed 's/^/\ \ /'|tee -a otp/subdomain| sed 's/^/┃/'
 echo "┖╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸"
 fi
+fi
 if [ "$vfirewall" == "y" ]||[ "$vssl" == "y" ]||[ "$vdns" == "y" ]||[ "$vsql" == "y" ]
 then
 echo `tput setaf 45`"
